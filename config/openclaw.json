@@ -73,11 +73,11 @@
   },
 
   "memory": {
-    "type": "lcm",
-    "config": {
-      "dbPath": "~/.openclaw/lcm.db",
-      "autoSummarizeThreshold": 100,
-      "promotionEnabled": true
+    "backend": "qmd",
+    "qmd": {
+      "sessions": {
+        "enabled": true
+      }
     }
   },
 

@@ -10,7 +10,7 @@ Una configuración de referencia para OpenClaw (https://docs.openclaw.ai) optimi
 - **VPS dedicada** (~5€/mes) con Ubuntu
 - **Ollama local/cloud** como proveedor principal (sin coste por token)
 - **Anthropic** como fallback para tareas críticas
-- **Memoria persistente** con LCM (lossless-claw)
+- **Memoria dual** (LCM + QMD embeddings)
 - **Telegram** como canal principal
 
 ## Estructura del repo
@@ -32,7 +32,7 @@ Una configuración de referencia para OpenClaw (https://docs.openclaw.ai) optimi
 ├── docs/
 │   ├── vps-setup.md            # Guía completa de setup (35 pasos)
 │   ├── ollama-setup.md         # Ollama cloud + modelos
-│   ├── lcm-guide.md            # Cómo funciona la memoria
+│   ├── memory-guide.md         # LCM + QMD, cómo coexisten
 │   └── cron-examples.md        # Ejemplos de cron + heartbeat
 └── skills/
     └── (skills personalizadas)
@@ -56,13 +56,18 @@ Una configuración de referencia para OpenClaw (https://docs.openclaw.ai) optimi
 | Crítico / fallback | Claude Sonnet 4-6 | ~$0.005/1K tokens | Cuando Ollama falla |
 | Council / análisis | Kimi K2.6 + GLM-5.1 | 0€ | Diversidad de opiniones |
 
-### LCM (Lossless Context Management)
+### Memoria dual (LCM + QMD)
 
-- **Qué es:** Plugin que comprime el historial sin perder información
-- **Por qué importa:** Sin esto, OpenClaw "olvida" conversaciones largas
-- **Config:** `plugins.entries.lcm` en `openclaw.json`
-- **Uso:** `lcm_grep`, `lcm_expand_query` para recuperar contexto antiguo
-- **Tamaño típico:** ~2MB para meses de conversaciones
+OpenClaw tiene **dos sistemas de memoria** que coexisten:
+
+| Sistema | Qué hace | Herramientas |
+|---------|----------|-------------|
+| **LCM** | Conversaciones exactas sin pérdida | `lcm_grep`, `lcm_expand_query` |
+| **QMD** | Búsqueda semántica por embeddings | `memory_search`, `memory_get` |
+
+**Flujo:** `memory_search` primero (rápido, semántico) → `lcm_expand_query` si necesitas el contexto exacto.
+
+Detalles completos: [docs/memory-guide.md](docs/memory-guide.md)
 
 ### Estructura de archivos workspace
 
