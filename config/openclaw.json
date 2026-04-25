@@ -5,7 +5,7 @@
   "models": {
     "providers": {
       "ollama": {
-        "baseURL": "https://ollama.yuj.es",
+        "baseURL": "https://your-ollama-instance.example.com",
         "models": [
           {"id": "glm-5.1", "name": "GLM-5.1", "context": 128000, "cost": {"input": 0, "output": 0}},
           {"id": "kimi-k2.6", "name": "Kimi K2.6", "context": 256000, "cost": {"input": 0, "output": 0}},

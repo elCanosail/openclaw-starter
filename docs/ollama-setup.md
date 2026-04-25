@@ -11,8 +11,8 @@ Si tu VPS tiene <8GB RAM, usa Ollama Cloud en lugar de modelos locales.
   "models": {
     "providers": {
       "ollama": {
-        "baseUrl": "https://ollama.yuj.es",
-        "apiKey": "tu-api-key-aquí"
+        "baseUrl": "https://your-ollama-instance.example.com",
+        "apiKey": "${OLLAMA_API_KEY}"
       }
     }
   }
@@ -89,7 +89,7 @@ ollama run glm-5.1 "Hola, ¿funcionas?"
 
 ## Recomendación
 
-- **VPS Hetzner CX22 (2 vCPU, 4GB):** Cloud obligatorio
-- **VPS Hetzner CX32 (4 vCPU, 8GB):** Cloud o local con modelos pequeños
-- **VPS Hetzner CPX31 (4 vCPU, 16GB):** Local con varios modelos
+- **VPS CX22 (2 vCPU, 4GB):** Cloud obligatorio
+- **VPS CX32 (4 vCPU, 8GB):** Cloud o local con modelos pequeños
+- **VPS CPX31 (4 vCPU, 16GB):** Local con varios modelos
 - **Máquina dedicada:** Local, todos los modelos

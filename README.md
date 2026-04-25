@@ -1,13 +1,13 @@
-# OpenClaw Starter — Configuración de producción
+# OpenClaw Starter - Configuración de producción
 
-> Repo público con nuestra configuración de OpenClaw para que otros puedan replicarla. Basado en lo que hemos aprendido en meses de uso en producción (VPS Hetzner + Ollama Cloud + Anthropic fallback).
->
-> **Filosofía:** Menos, pero perfecto. No es un fork de clawchief — es nuestro propio mapa de ruta.
+> Repo público de configuración de referencia para OpenClaw. Basado en meses de uso en producción (VPS + Ollama Cloud + Anthropic fallback).
+> 
+> **Filosofía:** Menos, pero perfecto.
 
 ## ¿Qué es esto?
 
 Una configuración de referencia para OpenClaw (https://docs.openclaw.ai) optimizada para:
-- **VPS dedicada** (Hetzner, ~5€/mes) con Ubuntu
+- **VPS dedicada** (~5€/mes) con Ubuntu
 - **Ollama local/cloud** como proveedor principal (sin coste por token)
 - **Anthropic** como fallback para tareas críticas
 - **Memoria persistente** con LCM (lossless-claw)
@@ -17,9 +17,7 @@ Una configuración de referencia para OpenClaw (https://docs.openclaw.ai) optimi
 
 ```
 ├── config/
-│   ├── openclaw.json           # Configuración principal
-│   ├── models.json             # Definición de modelos Ollama
-│   └── telegram.json           # Config del bot (ejemplo)
+│   └── openclaw.json           # Configuración principal
 ├── workspace/
 │   ├── AGENTS.md               # Cómo se comporta el agente
 │   ├── HEARTBEAT.md            # Tareas periódicas
@@ -29,14 +27,15 @@ Una configuración de referencia para OpenClaw (https://docs.openclaw.ai) optimi
 │   └── USER.md                 # Quién eres tú
 ├── scripts/
 │   ├── install.sh              # Setup inicial en VPS
-│   ├── backup.sh               # Backup diario a GDrive
+│   ├── backup.sh               # Backup diario (local + GDrive)
 │   └── restart-gateway.sh      # Restart seguro del gateway
-├── skills/
-│   └── (skills personalizadas)
-└── docs/
-    ├── vps-setup.md            # Guía completa de setup
-    ├── ollama-setup.md         # Ollama cloud + modelos
-    └── lcm-guide.md            # Cómo funciona la memoria
+├── docs/
+│   ├── vps-setup.md            # Guía completa de setup (35 pasos)
+│   ├── ollama-setup.md         # Ollama cloud + modelos
+│   ├── lcm-guide.md            # Cómo funciona la memoria
+│   └── cron-examples.md        # Ejemplos de cron + heartbeat
+└── skills/
+    └── (skills personalizadas)
 ```
 
 ## Quick start
@@ -86,15 +85,15 @@ workspace/
 ### Sub-agentes
 
 - **Modelo por defecto:** Kimi K2.6 vía Ollama (`ollama/kimi-k2.6:cloud`)
-- **Uso:** Tareas largas, coding, research — lo que tarda >30s
+- **Uso:** Tareas largas, coding, research - lo que tarda >30s
 - **Cambio proactivo:** El agente principal decide cuándo escalar
 - **Monitorización:** `subagents list`, `sessions_list`
 
 ## Créditos
 
-- Basado en [OpenClaw](https://github.com/openclaw/openclaw) — el framework
-- Inspirado por [clawchief](https://github.com/snarktank/clawchief) — el starter kit original que evaluamos y decidimos no usar (ya teníamos la mayor parte)
+- Basado en [OpenClaw](https://github.com/openclaw/openclaw) - el framework
+- Inspirado por [clawchief](https://github.com/snarktank/clawchief) — otro starter kit de referencia
 
 ---
 
-*Elcano Navigator Workspace*
+*OpenClaw Starter Config*

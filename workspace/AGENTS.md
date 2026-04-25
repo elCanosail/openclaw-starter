@@ -175,7 +175,7 @@ El agente no busca Skills por su cuenta — si no se lo dices, reinventa la rued
 
 ```
 ❌ "Busca licitaciones nuevas y manda alertas"
-✅ "Busca licitaciones nuevas y manda alertas. Usa la skill 'elicita-alertas'."
+✅ "Busca licitaciones nuevas y manda alertas. Usa la skill 'nombre-de-skill'."
 ```
 
 Una línea. Marca la diferencia.

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # OpenClaw Starter — Setup script para VPS Ubuntu 24.04
-# Basado en la config de producción de Elcano (Hetzner CX22)
+# Basado en config de producción (VPS Ubuntu 24.04)
 #
 
 set -euo pipefail
