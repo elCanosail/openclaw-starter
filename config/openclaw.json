@@ -1,0 +1,90 @@
+{
+  "$schema": "https://schemas.openclaw.ai/config.json",
+  "version": "2026.3.28",
+
+  "models": {
+    "providers": {
+      "ollama": {
+        "baseURL": "https://ollama.yuj.es",
+        "models": [
+          {"id": "glm-5.1", "name": "GLM-5.1", "context": 128000, "cost": {"input": 0, "output": 0}},
+          {"id": "kimi-k2.6", "name": "Kimi K2.6", "context": 256000, "cost": {"input": 0, "output": 0}},
+          {"id": "gemma4", "name": "Gemma 4", "context": 128000, "cost": {"input": 0, "output": 0}},
+          {"id": "qwen3.5", "name": "Qwen 3.5", "context": 128000, "cost": {"input": 0, "output": 0}},
+          {"id": "claude-sonnet-4-6", "name": "Claude Sonnet 4-6", "context": 200000, "cost": {"input": 0.003, "output": 0.015}},
+          {"id": "claude-opus-4-6", "name": "Claude Opus 4-6", "context": 200000, "cost": {"input": 0.015, "output": 0.075}}
+        ]
+      },
+      "anthropic": {
+        "apiKey": "${ANTHROPIC_API_KEY}",
+        "models": [
+          {"id": "claude-sonnet-4-6", "name": "Claude Sonnet 4-6", "context": 200000, "cost": {"input": 0.003, "output": 0.015}},
+          {"id": "claude-opus-4-6", "name": "Claude Opus 4-6", "context": 200000, "cost": {"input": 0.015, "output": 0.075}}
+        ]
+      }
+    },
+    "defaults": {
+      "model": "ollama/glm-5.1:cloud",
+      "fallbacks": ["ollama/kimi-k2.6:cloud", "anthropic/claude-sonnet-4-6"]
+    }
+  },
+
+  "agents": {
+    "defaults": {
+      "model": "ollama/glm-5.1:cloud",
+      "models": {
+        "complex": "ollama/kimi-k2.6:cloud",
+        "fallback": "anthropic/claude-sonnet-4-6",
+        "subagent": "ollama/kimi-k2.6:cloud"
+      },
+      "subagents": {
+        "model": "ollama/kimi-k2.6:cloud",
+        "maxConcurrent": 3
+      }
+    }
+  },
+
+  "plugins": {
+    "entries": {
+      "lcm": {
+        "enabled": true,
+        "mode": "lossless",
+        "provider": "qmd",
+        "config": {
+          "dbPath": "~/.openclaw/lcm.db",
+          "maxSummaries": 10000,
+          "autoSummarize": true
+        }
+      },
+      "telegram": {
+        "enabled": true,
+        "token": "${TELEGRAM_BOT_TOKEN}",
+        "allowedChats": ["${TELEGRAM_CHAT_ID}"],
+        "webhook": {
+          "enabled": false,
+          "url": ""
+        },
+        "polling": {
+          "enabled": true,
+          "interval": 1000
+        }
+      }
+    }
+  },
+
+  "memory": {
+    "type": "lcm",
+    "config": {
+      "dbPath": "~/.openclaw/lcm.db",
+      "autoSummarizeThreshold": 100,
+      "promotionEnabled": true
+    }
+  },
+
+  "logging": {
+    "level": "info",
+    "file": "~/.openclaw/logs/openclaw.log",
+    "maxSize": "100MB",
+    "maxFiles": 5
+  }
+}
